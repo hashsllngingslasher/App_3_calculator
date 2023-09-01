@@ -1,6 +1,8 @@
 package com.example.app_3_calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,18 +14,34 @@ public class MainActivity extends AppCompatActivity {
     private double firstVar, secondVar;
     private boolean isOperationClick;
     private String operation;
+    private Button NextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         textView = findViewById(R.id.text_view);
+        NextButton = findViewById(R.id.nextButton);
+
+         NextButton.setOnClickListener(view -> {
+             Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+             startActivity(intent);
+         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        finish();
     }
 
     public void onNumberClick(View view) {
         Button button = (Button) view;
         String buttonText = button.getText().toString();
         setTv_Result(buttonText);
+        if(!buttonText.equals("=")){
+            NextButton.setVisibility(View.GONE);
+        }
         if (buttonText.equals("AC")) {
             textView.setText("0");
             firstVar = 0;
@@ -43,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
         Button button = (Button) view;
         String buttonText = button.getText().toString();
 
+        if(buttonText.equals("=")){
+            NextButton.setVisibility(View.VISIBLE);
+        }
         switch (buttonText) {
             case "%":
                 calculatePercentage();
@@ -52,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "+":
             case "-":
-            case "X":
+            case "x":
             case "/":
                 setOperation(buttonText);
                 break;
@@ -95,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
             case "-":
                 results = firstVar - secondVar;
                 break;
-            case "X":
+            case "x":
                 results = firstVar * secondVar;
                 break;
             case "/":

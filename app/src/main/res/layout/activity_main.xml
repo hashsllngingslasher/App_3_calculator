@@ -7,6 +7,21 @@
     android:background="@color/black"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="125dp"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="Make magic"
+        android:textAllCaps="false"
+        android:textStyle="italic"
+        android:backgroundTint="@color/orange"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="25dp" />
+
     <FrameLayout
         app:layout_constraintBottom_toTopOf="@id/container"
         app:layout_constraintTop_toTopOf="parent"
